@@ -1,0 +1,46 @@
+body {
+  font-family: sans-serif;
+  font-size: 10pt;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+th {
+  background: #eeeeee;
+}
+
+table td, table td * {
+  vertical-align: top;
+}
+
+h1,
+h2 {
+  font-size: 18pt;
+}
+
+a {
+  color: rgb(5,99,193);
+}
+
+/* MS Word specific CSS to force landscape orientation, correct styles, etc */
+
+@page WordSection1 {
+  size: 792.0pt 612.0pt;
+  mso-page-orientation: landscape;
+  margin: 72.0pt 72.0pt 72.0pt 72.0pt;
+  mso-header-margin: 35.4pt;
+  mso-footer-margin: 35.4pt;
+  mso-paper-source: 0;
+}
+
+div.WordSection1 {
+  page: WordSection1;
+}

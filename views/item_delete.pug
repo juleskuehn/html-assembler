@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 #{title}: #{item.name}
+  
+  p Do you really want to delete this item?
+  
+  form(method='POST' action='')
+    if dependencies
+      div.error
+        h2 The following presets reference this section. You must delete them first.
+        ul
+          each d in dependencies
+            li
+              a(href=d.url) #{d.name}
+    div.form-group
+      input#itemid.form-control(type='hidden', name='itemid', required='true', value=item._id )
+
+    button.btn.btn-primary(type='submit') Delete

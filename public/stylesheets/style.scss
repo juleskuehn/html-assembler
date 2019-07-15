@@ -1,0 +1,50 @@
+// Make changes in style.scss (not style.css)
+
+.form-control {
+  width: 100%;
+}
+
+main {
+  padding-bottom: 30px;
+}
+
+// WET Overrides
+
+legend {
+  float: none;
+}
+
+details summary {
+  border: 0;
+  padding: 0;
+  color: #333;
+}
+
+details[open] {
+  border: 0;
+  padding-bottom: 0;
+}
+
+details {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+details[open]>summary {
+  border-bottom: 0;
+}
+
+fieldset {
+  border-top: 0;
+}
+
+// Clause tree
+
+.leafNode {
+  margin-left: 17px;
+}
+
+.clause-tree .checkbox input[type="checkbox"] {
+  position: relative;
+  margin-right: 10px;
+}
