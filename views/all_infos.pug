@@ -3,4 +3,12 @@ extends layout
 block content
   h1#wb-cont(property="name")= title
 
+  form(method='POST')
+    .saved-form-input(style='display:none')
+      each info in item_list
+        input(id=info.id type='checkbox' name='infos' value=info.id checked=true)
+    .btn-group
+      button.btn.btn-primary(type='submit' formaction='output-en') Plain HTML (English)
+      button.btn.btn-primary(type='submit' formaction='output-fr') Plain HTML (French)
+
   include includes/infos

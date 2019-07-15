@@ -58,7 +58,18 @@ exports.create_get = (req, res, next) => {
 
 // Renders output based on FPS selections to browser, along with download links
 exports.create_post = (req, res, next) => {
+  display_infos(req, res, next, 'all_infos');
+};
 
+exports.output_en = (req, res, next) => {
+  display_infos(req, res, next, 'output_en');
+};
+
+exports.output_fr = (req, res, next) => {
+  display_infos(req, res, next, 'output_fr');
+};
+
+const display_infos = (req, res, next, view) => {
   // Edge case: < 2 infos selected
   if (!(req.body.infos instanceof Array)) {
     if (typeof req.body.infos === 'undefined') {
@@ -81,7 +92,7 @@ exports.create_post = (req, res, next) => {
       res.redirect('/view/create');
     }
     // res.attachment('ICT Accessibility Requirements.html');
-    res.render('all_infos', {
+    res.render(view, {
       title: strings.generatedDocumentTitle,
       item_list: results.infos,
       breadcrumbs: [
@@ -90,4 +101,4 @@ exports.create_post = (req, res, next) => {
       ]
     });
   });
-};
+}
