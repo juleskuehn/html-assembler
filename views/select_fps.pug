@@ -12,7 +12,8 @@ block content
 
     include includes/select
 
-    button.btn.btn-primary(type='submit') Assemble document
+    button.btn.btn-primary(type='submit' formaction='output-en') Download (EN)
+    button.btn.btn-primary(type='submit' formaction='output-fr') Download (FR)
   
   //- Hidden data (for client-side javascript)
   .hidden#preset-data

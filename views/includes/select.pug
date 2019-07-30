@@ -12,7 +12,7 @@ fieldset#infos
     //- strong.required (required)
   each item, i in item_list
     -var selected = itemExists && preset.infos.indexOf(item.id) > -1 ? 'checked' : false
-    .checkbox
+    .checkbox(class=item.subsection ? 'level2' : false)
       label(for=item.id)
         input(id=item.id type='checkbox' name='infos' value=item.id checked=selected)
         | #{item.name}

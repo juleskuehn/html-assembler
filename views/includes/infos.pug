@@ -1,7 +1,10 @@
 each item in item_list
   if item.showHeading 
     .infoHeading
-      h2 #{item.name}
+      if item.subsection
+        h3 #{item.name}
+      else
+        h2 #{item.name}
   .infoBody
     | !{item.bodyHtml}
   

@@ -5,8 +5,8 @@ const Preset = require('../models/presetSchema');
 
 const strings = {
   editListTitle: 'Edit content',
-  listTitle: 'Edit informative sections',
-  createTitle: 'Create informative section',
+  listTitle: 'Edit sections',
+  createTitle: 'Create section',
   sectionTitleRequired: 'Section title required'
 }
 
@@ -43,8 +43,8 @@ exports.info_create_get = (req, res, next) => {
     title: strings.createTitle,
     breadcrumbs: [
       { url: '/', text: 'Home' },
-      { url: '/edit', text: 'Edit content' },
-      { url: '/edit/infos', text: 'Edit informative sections' }
+      { url: '/edit', text: strings.editListTitle },
+      { url: '/edit/infos', text: 'Edit sections' }
     ]
   });
 };
@@ -58,7 +58,8 @@ exports.info_create_post = (req, res, next) => {
     bodyHtml: req.body.bodyHtml,
     frName: req.body.frName,
     order: req.body.order,
-    frBodyHtml: req.body.frBodyHtml
+    frBodyHtml: req.body.frBodyHtml,
+    subsection: req.body.subsection === 'on'
   });
 
   // Check if Info with same name already exists.
@@ -91,12 +92,12 @@ exports.info_update_get = (req, res, next) => {
       return next(err);
     }
     res.render('info_form', {
-      title: 'Edit info',
+      title: 'Edit section',
       item: results.info,
       breadcrumbs: [
         { url: '/', text: 'Home' },
         { url: '/edit', text: 'Edit content' },
-        { url: '/edit/infos', text: 'Edit informative sections' }
+        { url: '/edit/infos', text: 'Edit sections' }
       ]
     });
   });
@@ -113,6 +114,7 @@ exports.info_update_post = (req, res, next) => {
     frName: req.body.frName,
     frBodyHtml: req.body.frBodyHtml,
     order: req.body.order,
+    subsection: req.body.subsection === 'on',
     _id: req.params.id // This is required, or a new ID will be assigned
   });
 
@@ -135,12 +137,12 @@ exports.info_delete_get = (req, res, next) => {
     }
     // Successful, so render.
     res.render('item_delete', {
-      title: 'Delete Info',
+      title: 'Delete Section',
       item: results.info,
       breadcrumbs: [
         { url: '/', text: 'Home' },
         { url: '/edit', text: 'Edit content' },
-        { url: '/edit/infos', text: 'Edit informative sections' },
+        { url: '/edit/infos', text: 'Edit sections' },
         { url: results.info.url, text: results.info.name }
       ]
     });
@@ -166,7 +168,7 @@ exports.info_delete_post = (req, res, next) => {
         breadcrumbs: [
           { url: '/', text: 'Home' },
           { url: '/edit', text: 'Edit content' },
-          { url: '/edit/infos', text: 'Edit informative sections' },
+          { url: '/edit/infos', text: 'Edit sections' },
           { url: results.info.url, text: results.info.name }
         ]
       });

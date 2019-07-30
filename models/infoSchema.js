@@ -7,7 +7,8 @@ const InfoSchema = new Schema({
   showHeading: { type: Boolean, required: true },
   bodyHtml: { type: String },
   frBodyHtml: { type: String },
-  order: { type: Number }
+  order: { type: Number },
+  subsection: { type: Boolean }
 });
 
 InfoSchema.virtual('url').get(function () {

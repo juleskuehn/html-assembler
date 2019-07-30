@@ -2,6 +2,7 @@
 
 const async = require('async');
 const mongoose = require('mongoose');
+const HtmlDocx = require('html-docx-js');
 
 const Info = require('../models/infoSchema');
 const Preset = require('../models/presetSchema');
@@ -10,7 +11,8 @@ const strings = {
   allInfosTitle: 'All sections',
   generatorTitle: 'Assemble document',
   createTitle: 'Select sections to include',
-  generatedDocumentTitle: 'Generated document'
+  englishTitle: 'AAACT InfoSession Summary',
+  frenchTitle: 'Résumé de la séance d’information sur le programme d’AATIA'
 };
 
 const breadcrumbs = [
@@ -56,11 +58,7 @@ exports.create_get = (req, res, next) => {
   });
 };
 
-// Renders output based on FPS selections to browser, along with download links
-exports.create_post = (req, res, next) => {
-  display_infos(req, res, next, 'all_infos');
-};
-
+// Renders output based on FPS selections to DOCX download
 exports.output_en = (req, res, next) => {
   display_infos(req, res, next, 'output_en');
 };
@@ -92,13 +90,18 @@ const display_infos = (req, res, next, view) => {
       res.redirect('/view/create');
     }
     // res.attachment('ICT Accessibility Requirements.html');
+    let title = view === 'output_fr' ? strings.frenchTitle : strings.englishTitle;
+    let filename = view === 'output_fr' ? 'Infosession FR.docx' : 'Infosession EN.docx';
+    res.attachment(filename);
     res.render(view, {
-      title: strings.generatedDocumentTitle,
-      item_list: results.infos,
-      breadcrumbs: [
-        { url: '/', text: 'Home' },
-        { url: '/view/create', text: strings.createTitle}
-      ]
+      title: title,
+      item_list: results.infos
+    },
+    (err, output) => {
+      res.send(HtmlDocx.asBlob(output, {
+        orientation: 'portrait',
+        margins: {}
+      }));
     });
   });
 }

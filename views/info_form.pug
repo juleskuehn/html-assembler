@@ -18,6 +18,10 @@ block form
       label(for='showHeading')
         input#showHeading(type='checkbox' name='showHeading' checked=(itemExists ? item.showHeading : 'checked'))
         | Display section title as a heading
+    .checkbox
+      label(for='subsection')
+        input#subsection(type='checkbox' name='subsection' checked=(itemExists ? item.subsection : false))
+        | Subsection
     .form-group
       label(for='bodyHtml')
         span.field-name Content (HTML)
